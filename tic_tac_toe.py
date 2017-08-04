@@ -78,15 +78,16 @@ def main():
         user = get_move(turn)
         move += 1
         board = update_board(board, user, turn)
-        winner = check_win(board)
-        if winner != -1:
-            out = "X" if winner == 1 else "O"
-            print_board(board)
-            print("The winner is {}".format(out))
-            break
-        elif move == 9:
-            print_board(board)
-            print("No winner")
+        if move > 4:
+            winner = check_win(board)
+            if winner != -1:
+                out = "X" if winner == 1 else "O"
+                print_board(board)
+                print("The winner is {}".format(out))
+                break
+            elif move == 9:
+                print_board(board)
+                print("No winner")
 
 
 if __name__ == "__main__":
