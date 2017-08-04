@@ -91,4 +91,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    new_game = True
+    while new_game:
+        main()
+        new_game = True if input(
+            "Start a new game? (y/n)").lower() == 'y' else False
