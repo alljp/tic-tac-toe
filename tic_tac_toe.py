@@ -43,6 +43,14 @@ def get_move(turn):
             print("{} is not a valid move! Please try again. ".format(move))
 
 
+def update_board(board, move, turn):
+    while board[move] != -1:
+        print("Invalid move! Cell already taken. Please try again.\n")
+        move = get_move(turn)
+    board[move] = 1 if turn == 'X' else 0
+    return board
+
+
 def main():
     print_instruction()
     board = [-1 for i in range(9)]
@@ -58,7 +66,8 @@ def main():
 
         user = get_move(turn)
         move += 1
-        print(user)
+        board = update_board(board, user, turn)
+        print_board(board)
 
 
 if __name__ == "__main__":
