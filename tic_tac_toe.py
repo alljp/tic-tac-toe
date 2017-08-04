@@ -29,6 +29,20 @@ def print_instruction():
     print_board()
 
 
+def get_move(turn):
+    while True:
+        move = input("Where would you like to place {}: (1-9)? ".format(turn))
+        try:
+            move = int(move)
+            if move in range(1, 10):
+                return move-1
+            else:
+                print("Not a valid move! Please try again. ")
+                print_instruction()
+        except:
+            print("{} is not a valid move! Please try again. ".format(move))
+
+
 def main():
     print_instruction()
     board = [-1 for i in range(9)]
@@ -42,8 +56,9 @@ def main():
         else:
             turn = "O"
 
-        user = input(turn)
+        user = get_move(turn)
         move += 1
+        print(user)
 
 
 if __name__ == "__main__":
