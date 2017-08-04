@@ -88,6 +88,7 @@ def main():
             elif move == 9:
                 print_board(board)
                 print("No winner")
+                break
 
 
 if __name__ == "__main__":
