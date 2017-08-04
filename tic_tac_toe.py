@@ -78,6 +78,10 @@ def main():
         user = get_move(turn)
         move += 1
         board = update_board(board, user, turn)
+        winner = check_win(board)
+        if winner != -1:
+            out = "X" if winner == 1 else "O"
+            print("The winner is {}".format(out))
 
 
 if __name__ == "__main__":
