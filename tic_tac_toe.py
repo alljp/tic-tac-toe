@@ -31,6 +31,12 @@ def print_instruction():
 
 def main():
     print_instruction()
+    board = [-1 for i in range(9)]
+    win = False
+    move = 0
+    while not win:
+        print_board(board)
+        move = input()
 
 
 if __name__ == "__main__":
