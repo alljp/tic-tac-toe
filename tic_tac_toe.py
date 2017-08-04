@@ -36,7 +36,14 @@ def main():
     move = 0
     while not win:
         print_board(board)
-        move = input()
+        print("Turn number {}".format(move+1))
+        if move % 2 == 0:
+            turn = "X"
+        else:
+            turn = "O"
+
+        user = input(turn)
+        move += 1
 
 
 if __name__ == "__main__":
