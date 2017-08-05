@@ -63,7 +63,7 @@ def check_win(board):
     return -1
 
 
-def main():
+def game():
     print_instruction()
     board = [-1 for i in range(9)]
     win = False
@@ -91,9 +91,13 @@ def main():
                 break
 
 
-if __name__ == "__main__":
+def main():
     new_game = True
     while new_game:
-        main()
+        game()
         new_game = True if input(
             "Start a new game? (y/n)").lower() == 'y' else False
+
+
+if __name__ == "__main__":
+    main()
