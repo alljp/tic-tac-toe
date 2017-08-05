@@ -1,16 +1,20 @@
 from __future__ import print_function
 
 
+def print_cell_value(ch):
+    return " {}".format(ch) if len(str(ch)) < 2 else "{}".format(ch)
+
+
 def print_board(n, board):
     for i in range(n):
         print(" ", end="")
         for j in range(n):
             if board[i*n+j] == 1:
-                print("X", end="")
+                print(print_cell_value("X"), end="")
             elif board[i*n+j] == 0:
-                print("O", end="")
+                print(print_cell_value("O"), end="")
             else:
-                print(" ", end="")
+                print(print_cell_value(" "), end="")
             if j != n-1:
                 print(" | ", end="")
         print()
@@ -23,9 +27,9 @@ def print_board(n, board):
 def print_instruction(n):
     print("Please use the following cell numbers to make your move")
     for i in range(n):
-        print(" ", end="")
+        print(print_cell_value(" "), end="")
         for j in range(n):
-            print(i*n+j+1, end="")
+            print(print_cell_value(i*n+j+1), end="")
             if j != n-1:
                 print(" | ", end="")
         print()
