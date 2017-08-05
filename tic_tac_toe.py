@@ -5,6 +5,10 @@ def print_cell_value(ch):
     return " {}".format(ch) if len(str(ch)) < 2 else "{}".format(ch)
 
 
+def print_row_seperator(num):
+    return "-----"*num
+
+
 def print_board(n, board):
     for i in range(n):
         print(" ", end="")
@@ -19,7 +23,7 @@ def print_board(n, board):
                 print(" | ", end="")
         print()
         if i != n-1:
-            print("-----------")
+            print(print_row_seperator(n))
         else:
             print()
 
@@ -34,7 +38,7 @@ def print_instruction(n):
                 print(" | ", end="")
         print()
         if i != n-1:
-            print("-----------")
+            print(print_row_seperator(n))
         else:
             print()
 
