@@ -1,35 +1,35 @@
 from __future__ import print_function
 
 
-def print_board(board):
-    for i in range(3):
+def print_board(n, board):
+    for i in range(n):
         print(" ", end="")
-        for j in range(3):
-            if board[i*3+j] == 1:
+        for j in range(n):
+            if board[i*n+j] == 1:
                 print("X", end="")
-            elif board[i*3+j] == 0:
+            elif board[i*n+j] == 0:
                 print("O", end="")
             else:
                 print(" ", end="")
-            if j != 2:
+            if j != n-1:
                 print(" | ", end="")
         print()
-        if i != 2:
+        if i != n-1:
             print("-----------")
         else:
             print()
 
 
-def print_instruction():
+def print_instruction(n):
     print("Please use the following cell numbers to make your move")
-    for i in range(3):
+    for i in range(n):
         print(" ", end="")
-        for j in range(3):
-            print(i*3+j+1, end="")
-            if j != 2:
+        for j in range(n):
+            print(i*n+j+1, end="")
+            if j != n-1:
                 print(" | ", end="")
         print()
-        if i != 2:
+        if i != n-1:
             print("-----------")
         else:
             print()
@@ -44,7 +44,7 @@ def get_move(turn):
                 return move-1
             else:
                 print("Not a valid move! Please try again. ")
-                print_instruction()
+                print_instruction(3)
         except:
             print("{} is not a valid move! Please try again. ".format(move))
 
@@ -70,12 +70,12 @@ def check_win(board):
 
 
 def game():
-    print_instruction()
+    print_instruction(3)
     board = [-1 for i in range(9)]
     win = False
     move = 0
     while not win:
-        print_board(board)
+        print_board(3, board)
         print("Turn number {}".format(move+1))
         if move % 2 == 0:
             turn = "X"
@@ -88,11 +88,11 @@ def game():
             winner = check_win(board)
             if winner != -1:
                 out = "X" if winner == 1 else "O"
-                print_board(board)
+                print_board(3, board)
                 print("The winner is {}".format(out))
                 break
             elif move == 9:
-                print_board(board)
+                print_board(3, board)
                 print("No winner")
                 break
 
