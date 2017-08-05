@@ -69,13 +69,13 @@ def check_win(board):
     return -1
 
 
-def game():
-    print_instruction(3)
-    board = [-1 for i in range(9)]
+def game(n):
+    print_instruction(n)
+    board = [-1 for i in range(n*n)]
     win = False
     move = 0
     while not win:
-        print_board(3, board)
+        print_board(n, board)
         print("Turn number {}".format(move+1))
         if move % 2 == 0:
             turn = "X"
@@ -84,15 +84,15 @@ def game():
         user = get_move(turn)
         move += 1
         board = update_board(board, user, turn)
-        if move > 4:
+        if move > (n-1)*2:
             winner = check_win(board)
             if winner != -1:
                 out = "X" if winner == 1 else "O"
-                print_board(3, board)
+                print_board(n, board)
                 print("The winner is {}".format(out))
                 break
-            elif move == 9:
-                print_board(3, board)
+            elif move == n*n:
+                print_board(n, board)
                 print("No winner")
                 break
 
@@ -100,7 +100,9 @@ def game():
 def main():
     new_game = True
     while new_game:
-        game()
+        print("Enter board size: ")
+        n = int(input())
+        game(n)
         new_game = True if input(
             "Start a new game? (y/n)").lower() == 'y' else False
 
