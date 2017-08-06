@@ -79,7 +79,7 @@ def return_diags(n):
     return [main_diag, off_diag]
 
 
-def generate_Win_conditions(n):
+def generate_win_conditions(n):
     out = []
     for i in return_rows(n):
         out.append(i)
@@ -104,7 +104,7 @@ def check_win(win_conditions, n, board):
 
 
 def game(n):
-    win_conditions = generate_Win_conditions(n)
+    win_conditions = generate_win_conditions(n)
     print_instruction(n)
     board = [-1 for i in range(n*n)]
     win = False
