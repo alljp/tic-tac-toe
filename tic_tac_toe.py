@@ -1,6 +1,9 @@
 from __future__ import print_function
 
 
+WIN_CONDITIONS = []
+
+
 def print_cell_value(ch):
     return " {}".format(ch) if len(str(ch)) < 2 else "{}".format(ch)
 
@@ -65,9 +68,33 @@ def update_board(board, move, turn):
     return board
 
 
-def check_win(board):
-    win_conditions = ((0, 1, 2), (3, 4, 5), (6, 7, 8), (0, 3, 6),
-                      (1, 4, 7), (2, 5, 8), (0, 4, 8), (2, 4, 6))
+def return_rows(n):
+    return [[i*n+j for j in range(n)] for i in range(n)]
+
+
+def return_cols(n):
+    return [[i+j*n for j in range(n)] for i in range(n)]
+
+
+def return_diags(n):
+    main_diag = [i*(n+1) for i in range(n)]
+    off_diag = [(n-1)*(i+1) for i in range(n)]
+    return [main_diag, off_diag]
+
+
+def generate_Win_conditions(n):
+    out = []
+    for i in return_rows(n):
+        out.append(i)
+    for i in return_cols(n):
+        out.append(i)
+    for i in return_diags(n):
+        out.append(i)
+    return out
+
+
+def check_win(n, board):
+    win_conditions = [i for i in generate_Win_conditions(n)]
     for i in win_conditions:
         try:
             if board[i[0]] == board[i[1]] == board[i[2]]:
@@ -93,7 +120,7 @@ def game(n):
         move += 1
         board = update_board(board, user, turn)
         if move > (n-1)*2:
-            winner = check_win(board)
+            winner = check_win(n, board)
             if winner != -1:
                 out = "X" if winner == 1 else "O"
                 print_board(n, board)
