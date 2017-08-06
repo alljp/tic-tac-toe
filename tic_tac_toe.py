@@ -1,9 +1,6 @@
 from __future__ import print_function
 
 
-WIN_CONDITIONS = []
-
-
 def print_cell_value(ch):
     return " {}".format(ch) if len(str(ch)) < 2 else "{}".format(ch)
 
@@ -46,16 +43,16 @@ def print_instruction(n):
             print()
 
 
-def get_move(turn):
+def get_validate_move(n, turn):
     while True:
         move = input("Where would you like to place {}: (1-9)? ".format(turn))
         try:
             move = int(move)
-            if move in range(1, 10):
+            if move in range(1, n*n+1):
                 return move-1
             else:
                 print("Not a valid move! Please try again. ")
-                print_instruction(3)
+                print_instruction(n)
         except:
             print("{} is not a valid move! Please try again. ".format(move))
 
@@ -63,7 +60,7 @@ def get_move(turn):
 def update_board(board, move, turn):
     while board[move] != -1:
         print("Invalid move! Cell already taken. Please try again.\n")
-        move = get_move(turn)
+        move = get_validate_move(turn)
     board[move] = 1 if turn == 'X' else 0
     return board
 
@@ -93,11 +90,13 @@ def generate_Win_conditions(n):
     return out
 
 
-def check_win(n, board):
-    win_conditions = [i for i in generate_Win_conditions(n)]
+def check_win(win_conditions, n, board):
     for i in win_conditions:
         try:
-            if board[i[0]] == board[i[1]] == board[i[2]]:
+            out = []
+            for j in i:
+                out.append(True if board[i[0]] == board[j] else False)
+            if all(out):
                 return board[i[0]]
         except:
             pass
@@ -105,6 +104,7 @@ def check_win(n, board):
 
 
 def game(n):
+    win_conditions = generate_Win_conditions(n)
     print_instruction(n)
     board = [-1 for i in range(n*n)]
     win = False
@@ -116,11 +116,11 @@ def game(n):
             turn = "X"
         else:
             turn = "O"
-        user = get_move(turn)
+        user = get_validate_move(n, turn)
         move += 1
         board = update_board(board, user, turn)
         if move > (n-1)*2:
-            winner = check_win(n, board)
+            winner = check_win(win_conditions, n, board)
             if winner != -1:
                 out = "X" if winner == 1 else "O"
                 print_board(n, board)
