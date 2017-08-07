@@ -55,10 +55,10 @@ def get_validate_move(n, turn):
             print("{} is not a valid move! Please try again. ".format(move))
 
 
-def update_board(board, move, turn):
+def update_board(board, move, turn, n):
     while board[move] != -1:
         print("Invalid move! Cell already taken. Please try again.\n")
-        move = get_validate_move(turn)
+        move = get_validate_move(n, turn)
     board[move] = 1 if turn == 'X' else 0
     return board
 
@@ -105,7 +105,7 @@ def next_move(n, board, move):
     turn = decide_turn(move)
     user = get_validate_move(n, turn)
     move += 1
-    board = update_board(board, user, turn)
+    board = update_board(board, user, turn, n)
     return board, move
 
 
