@@ -143,8 +143,19 @@ def pvp_game(n):
             win = decide_winner(win_conditions, n, board, move)
 
 
-def get_comp_move(n, board, turn, win_conditions):
+def test_move_win(n, board, turn, move, win_conditions):
     pass
+
+
+def get_comp_move(n, board, turn, win_conditions):
+    for i in range(0, n*n):
+        if board[i] == -1 and test_move_win(
+                n, board, turn, i, win_conditions):
+            return i
+    for i in range(0, n*n):
+        if board[i] == -1 and test_move_win(
+                n, board, "O" if turn == "X" else "X", i, win_conditions):
+            return i
 
 
 def next_pvc_move(n, board, move, win_conditions):
