@@ -144,13 +144,11 @@ def game(n):
 
 
 def main():
-    new_game = True
-    while new_game:
-        print("Enter board size: ")
-        n = int(input())
+    while True:
+        n = int(input("Enter board size: "))
         game(n)
-        new_game = True if input(
-            "Start a new game? (y/n)").lower() == 'y' else False
+        if input("Start a new game? (y/n)").lower() != 'y':
+            break
 
 
 if __name__ == "__main__":
