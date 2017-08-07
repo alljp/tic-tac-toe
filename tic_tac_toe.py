@@ -143,8 +143,18 @@ def pvp_game(n):
             win = decide_winner(win_conditions, n, board, move)
 
 
-def next_pvc_move(n, board, move, win_conditions):
+def get_comp_move(n, board, turn, win_conditions):
     pass
+
+
+def next_pvc_move(n, board, move, win_conditions):
+    turn = decide_turn(move)
+    user = get_validate_move(n, turn)
+    move += 1
+    board = update_board(board, user, turn, n)
+    comp_move = get_comp_move(n, board, decide_turn(move), win_conditions)
+    board = update_board(board, comp_move, decide_turn(move), n)
+    return board, move+1
 
 
 def pvc_game(n):
