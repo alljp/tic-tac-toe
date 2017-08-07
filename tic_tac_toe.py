@@ -101,6 +101,10 @@ def check_win(win_conditions, n, board):
     return -1
 
 
+def decide_turn(move):
+    return "X" if move % 2 == 0 else "O"
+
+
 def initialise_game(n):
     board = [-1 for i in range(n*n)]
     win = False
@@ -115,10 +119,7 @@ def game(n):
     while not win:
         print_board(n, board)
         print("Turn number {}".format(move+1))
-        if move % 2 == 0:
-            turn = "X"
-        else:
-            turn = "O"
+        turn = decide_turn(move)
         user = get_validate_move(n, turn)
         move += 1
         board = update_board(board, user, turn)
