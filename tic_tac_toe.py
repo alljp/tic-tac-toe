@@ -143,8 +143,21 @@ def pvp_game(n):
             win = decide_winner(win_conditions, n, board, move)
 
 
-def pvc_game(n):
+def next_pvc_move(n, board, move, win_conditions):
     pass
+
+
+def pvc_game(n):
+    win_conditions = generate_win_conditions(n)
+    print_instruction(n)
+    board, win, move = initialise_game(n)
+    print_board(n, board)
+    while not win:
+        print("Turn number {}".format(move+1))
+        board, move = next_pvc_move(n, board, move, win_conditions)
+        print_board(n, board)
+        if move > (n-1)*2:
+            win = decide_winner(win_conditions, n, board, move)
 
 
 def main():
