@@ -1,6 +1,3 @@
-from __future__ import print_function
-
-
 def print_cell_value(ch):
     return " {}".format(ch) if len(str(ch)) < 2 else "{}".format(ch)
 
@@ -103,12 +100,17 @@ def check_win(win_conditions, n, board):
     return -1
 
 
-def game(n):
-    win_conditions = generate_win_conditions(n)
-    print_instruction(n)
+def initialise_game(n):
     board = [-1 for i in range(n*n)]
     win = False
     move = 0
+    return board, win, move
+
+
+def game(n):
+    win_conditions = generate_win_conditions(n)
+    print_instruction(n)
+    board, win, move = initialise_game(n)
     while not win:
         print_board(n, board)
         print("Turn number {}".format(move+1))
