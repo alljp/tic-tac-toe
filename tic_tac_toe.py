@@ -42,7 +42,8 @@ def print_instruction(n):
 
 def get_validate_move(n, turn):
     while True:
-        move = input("Where would you like to place {}: (1-9)? ".format(turn))
+        move = input(
+            "Where would you like to place {}: (1-{})? ".format(turn, n*n))
         try:
             move = int(move)
             if move in range(1, n*n+1):
