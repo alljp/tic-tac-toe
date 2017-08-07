@@ -101,6 +101,14 @@ def check_win(win_conditions, n, board):
     return -1
 
 
+def next_move(n, board, move):
+    turn = decide_turn(move)
+    user = get_validate_move(n, turn)
+    move += 1
+    board = update_board(board, user, turn)
+    return board, move
+
+
 def decide_turn(move):
     return "X" if move % 2 == 0 else "O"
 
@@ -116,22 +124,17 @@ def game(n):
     win_conditions = generate_win_conditions(n)
     print_instruction(n)
     board, win, move = initialise_game(n)
+    print_board(n, board)
     while not win:
-        print_board(n, board)
         print("Turn number {}".format(move+1))
-        turn = decide_turn(move)
-        user = get_validate_move(n, turn)
-        move += 1
-        board = update_board(board, user, turn)
+        board, move = next_move(n, board, move)
+        print_board(n, board)
         if move > (n-1)*2:
             winner = check_win(win_conditions, n, board)
             if winner != -1:
-                out = "X" if winner == 1 else "O"
-                print_board(n, board)
-                print("The winner is {}".format(out))
+                print("The winner is {}".format("X" if winner == 1 else "O"))
                 break
             elif move == n*n:
-                print_board(n, board)
                 print("No winner")
                 break
 
