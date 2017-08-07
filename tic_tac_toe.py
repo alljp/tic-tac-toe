@@ -111,7 +111,7 @@ def decide_winner(win_conditions, n, board, move):
         return True
 
 
-def next_move(n, board, move):
+def next_pvp_move(n, board, move):
     turn = decide_turn(move)
     user = get_validate_move(n, turn)
     move += 1
@@ -130,23 +130,33 @@ def initialise_game(n):
     return board, win, move
 
 
-def game(n):
+def pvp_game(n):
     win_conditions = generate_win_conditions(n)
     print_instruction(n)
     board, win, move = initialise_game(n)
     print_board(n, board)
     while not win:
         print("Turn number {}".format(move+1))
-        board, move = next_move(n, board, move)
+        board, move = next_pvp_move(n, board, move)
         print_board(n, board)
         if move > (n-1)*2:
             win = decide_winner(win_conditions, n, board, move)
 
 
+def pvc_game(n):
+    pass
+
+
 def main():
     while True:
         n = int(input("Enter board size: "))
-        game(n)
+        op = int(input("""How do you want to play?
+            1.Player vs Player
+            2.Player vs Computer"""))
+        if op == 1:
+            pvp_game(n)
+        if op == 2:
+            pvc_game(n)
         if input("Start a new game? (y/n)").lower() != 'y':
             break
 
