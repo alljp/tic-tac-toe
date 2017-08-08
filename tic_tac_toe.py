@@ -149,15 +149,21 @@ def test_move_win(n, board, turn, move, win_conditions):
     return False if check_win(win_conditions, n, board_copy) == -1 else True
 
 
-def get_comp_move(n, board, turn, win_conditions):
+def comp_win_move(n, board, turn, win_conditions):
     for i in range(0, n*n):
         if board[i] == -1 and test_move_win(
                 n, board, turn, i, win_conditions):
             return i
+
+
+def player_win_move(n, board, turn, win_conditions):
     for i in range(0, n*n):
         if board[i] == -1 and test_move_win(
                 n, board, "O" if turn == "X" else "X", i, win_conditions):
             return i
+
+
+def get_mid_cell(n, board, turn, win_conditions):
     if n % 2 != 0:
         if board[(n*n)//2] == -1:
             return (n*n)//2
@@ -165,11 +171,29 @@ def get_comp_move(n, board, turn, win_conditions):
         for i in [n*(n-1)//2, (n*(n-1)//2)-1, n*(n+1)//2, (n*(n+1)//2)-1]:
             if board[i] == -1:
                 return i
+
+
+def get_corner_cell(n, board, turn, win_conditions):
     for i in [0, n-1, n*n-1, n*(n-1)]:
         if board[i] == -1:
             return i
+
+
+def get_any_cell(n, board, turn, win_conditions):
     for i in range(0, n*n):
         if board[i] == -1:
+            return i
+
+
+def get_comp_move(n, board, turn, win_conditions):
+    out = []
+    out.append(comp_win_move(n, board, turn, win_conditions))
+    out.append(player_win_move(n, board, turn, win_conditions))
+    out.append(get_mid_cell(n, board, turn, win_conditions))
+    out.append(get_corner_cell(n, board, turn, win_conditions))
+    out.append(get_any_cell(n, board, turn, win_conditions))
+    for i in out:
+        if i is not None:
             return i
 
 
