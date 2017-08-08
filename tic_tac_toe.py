@@ -106,7 +106,7 @@ def decide_winner(win_conditions, n, board, move):
     if winner != -1:
         print("The winner is {}".format("X" if winner == 1 else "O"))
         return True
-    elif move == n*n:
+    elif move > n*n:
         print("No winner")
         return True
 
