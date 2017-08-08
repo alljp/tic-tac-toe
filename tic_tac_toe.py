@@ -158,17 +158,17 @@ def get_comp_move(n, board, turn, win_conditions):
         if board[i] == -1 and test_move_win(
                 n, board, "O" if turn == "X" else "X", i, win_conditions):
             return i
-    for i in [0, n-1, n*n-1, n*(n-1)]:
-        if board[i] == -1:
-            return i
     if n % 2 != 0:
-        if board[(n*n+1)//2] == -1:
-            return (n*n+1)//2
+        if board[(n*n)//2] == -1:
+            return (n*n)//2
     else:
         for i in [n*(n-1)//2, (n*(n-1)//2)-1, n*(n+1)//2, (n*(n+1)//2)-1]:
             if board[i] == -1:
                 return i
-    for i in range[0, n*n]:
+    for i in [0, n-1, n*n-1, n*(n-1)]:
+        if board[i] == -1:
+            return i
+    for i in range(0, n*n):
         if board[i] == -1:
             return i
 
