@@ -178,8 +178,9 @@ def next_pvc_move(n, board, move, win_conditions):
     user = get_validate_move(n, turn)
     move += 1
     board = update_board(board, user, turn, n)
-    comp_move = get_comp_move(n, board, decide_turn(move), win_conditions)
-    board = update_board(board, comp_move, decide_turn(move), n)
+    if move < n*n-1:
+        comp_move = get_comp_move(n, board, decide_turn(move), win_conditions)
+        board = update_board(board, comp_move, decide_turn(move), n)
     return board, move+1
 
 
