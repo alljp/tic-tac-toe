@@ -145,7 +145,7 @@ def pvp_game(n):
 
 def test_move_win(n, board, turn, move, win_conditions):
     board_copy = board[:]
-    board_copy[move] = turn
+    update_board(board_copy, move, turn, n)
     return False if check_win(win_conditions, n, board_copy) == -1 else True
 
 
