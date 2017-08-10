@@ -79,9 +79,9 @@ def get_any_cell(size, board):
 
 def get_comp_move(size, board, turn, win_conditions):
     out = []
-    out.append(get_mid_cell(size, board))
     out.append(comp_win_move(size, board, turn, win_conditions))
     out.append(player_win_move(size, board, turn, win_conditions))
+    out.append(get_mid_cell(size, board))
     out.append(get_comp_fork_move(size, board, turn, win_conditions))
     out.append(get_player_fork_move(size, board, turn, win_conditions))
     out.append(get_corner_cell(size, board))
