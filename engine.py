@@ -21,6 +21,39 @@ def player_win_move(size, board, turn, win_conditions):
             return i
 
 
+def test_fork_move(size, board, turn, move, win_conditions):
+    board_copy = board[:]
+    utils.update_board(board_copy, move, turn, size)
+    possibilities = 0
+    for j in range(0, size*size):
+        if board_copy[j] == -1 and test_move_win(
+                size, board_copy, turn, j, win_conditions):
+            possibilities += 1
+    return possibilities >= 2
+
+
+def get_comp_fork_move(size, board, turn, win_conditions):
+    for i in range(size*size):
+        if board[i] == -1 and test_fork_move(
+                size, board, turn, i, win_conditions):
+            return i
+
+
+def get_player_fork_move(size, board, turn, win_conditions):
+    possibilities = 0
+    for i in range(size*size):
+        if board[i] == -1 and test_fork_move(
+                size, board, "O" if turn == "X" else "X", i, win_conditions):
+            possibilities += 1
+            temp_move = i
+    if possibilities == 1:
+        return temp_move
+    elif possibilities > 1:
+        for j in [1, 3, 5, 7]:
+            if board[j] == -1:
+                return j
+
+
 def get_mid_cell(size, board):
     if size % 2 != 0:
         if board[(size*size)//2] == -1:
@@ -46,9 +79,11 @@ def get_any_cell(size, board):
 
 def get_comp_move(size, board, turn, win_conditions):
     out = []
+    out.append(get_mid_cell(size, board))
     out.append(comp_win_move(size, board, turn, win_conditions))
     out.append(player_win_move(size, board, turn, win_conditions))
-    out.append(get_mid_cell(size, board))
+    out.append(get_comp_fork_move(size, board, turn, win_conditions))
+    out.append(get_player_fork_move(size, board, turn, win_conditions))
     out.append(get_corner_cell(size, board))
     out.append(get_any_cell(size, board))
     for i in out:
