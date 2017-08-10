@@ -151,7 +151,7 @@ def player_win_move(size, board, turn, win_conditions):
             return i
 
 
-def get_mid_cell(size, board, turn, win_conditions):
+def get_mid_cell(size, board):
     if size % 2 != 0:
         if board[(size*size)//2] == -1:
             return (size*size)//2
@@ -162,13 +162,13 @@ def get_mid_cell(size, board, turn, win_conditions):
                 return i
 
 
-def get_corner_cell(size, board, turn, win_conditions):
+def get_corner_cell(size, board):
     for i in [0, size-1, size*size-1, size*(size-1)]:
         if board[i] == -1:
             return i
 
 
-def get_any_cell(size, board, turn, win_conditions):
+def get_any_cell(size, board):
     for i in range(0, size*size):
         if board[i] == -1:
             return i
@@ -178,9 +178,9 @@ def get_comp_move(size, board, turn, win_conditions):
     out = []
     out.append(comp_win_move(size, board, turn, win_conditions))
     out.append(player_win_move(size, board, turn, win_conditions))
-    out.append(get_mid_cell(size, board, turn, win_conditions))
-    out.append(get_corner_cell(size, board, turn, win_conditions))
-    out.append(get_any_cell(size, board, turn, win_conditions))
+    out.append(get_mid_cell(size, board))
+    out.append(get_corner_cell(size, board))
+    out.append(get_any_cell(size, board))
     for i in out:
         if i is not None:
             return i
