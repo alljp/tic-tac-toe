@@ -51,7 +51,7 @@ def decide_winner(win_conditions, size, board, move):
     if winner != -1:
         print("The winner is {}".format("X" if winner == 1 else "O"))
         return True
-    elif move == size*size:
+    elif move > size*size:
         print("No winner")
         return True
 
