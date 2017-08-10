@@ -61,8 +61,7 @@ def next_pvc_move(size, board, move, win_conditions):
     user = utils.get_validate_move(size, turn)
     move += 1
     board = utils.update_board(board, user, turn, size)
-    # next_move(size, board, move)
-    if move < size*size-1:
+    if move <= size*size-1:
         comp_move = get_comp_move(
             size, board, utils.decide_turn(move), win_conditions)
         board = utils.update_board(
