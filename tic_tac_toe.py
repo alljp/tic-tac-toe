@@ -38,11 +38,7 @@ def decide_winner(win_conditions, size, board, move):
 
 
 def next_move(size, board, move):
-    turn = utils.decide_turn(move)
-    user = utils.get_validate_move(size, turn)
-    move += 1
-    board = utils.update_board(board, user, turn, size)
-    return board, move
+    return utils.get_update_user_move(size, board, move)
 
 
 def initialise_game(size):
@@ -59,7 +55,6 @@ def game(size, opt):
     utils.print_board(size, board)
     if opt == 1:
         while not win:
-            print("Turn number {}".format(move+1))
             board, move = next_move(size, board, move)
             utils.print_board(size, board)
             if move > (size-1)*2:

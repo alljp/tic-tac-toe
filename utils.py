@@ -68,6 +68,15 @@ def decide_turn(move):
     return "X" if move % 2 == 0 else "O"
 
 
+def get_update_user_move(size, board, move):
+    print("Turn number {}".format(move+1))
+    turn = decide_turn(move)
+    user = get_validate_move(size, turn)
+    move += 1
+    board = update_board(board, user, turn, size)
+    return board, move
+
+
 def check_win(win_conditions, board):
     for i in win_conditions:
         try:
