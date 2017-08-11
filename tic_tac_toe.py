@@ -2,25 +2,6 @@ from engine import next_pvc_move
 import utils
 
 
-def print_board(size, board):
-    for i in range(size):
-        print(" ", end="")
-        for j in range(size):
-            if board[i*size+j] == 1:
-                print(utils.print_cell_value("X"), end="")
-            elif board[i*size+j] == 0:
-                print(utils.print_cell_value("O"), end="")
-            else:
-                print(utils.print_cell_value(" "), end="")
-            if j != size-1:
-                print(" | ", end="")
-        print()
-        if i != size-1:
-            print(utils.print_row_seperator(size))
-        else:
-            print()
-
-
 def return_rows(size):
     return [[i*size+j for j in range(size)] for i in range(size)]
 
@@ -75,16 +56,22 @@ def game(size, opt):
     win_conditions = generate_win_conditions(size)
     utils.print_instruction(size)
     board, win, move = initialise_game(size)
-    print_board(size, board)
-    while not win:
-        print("Turn number {}".format(move+1))
-        if opt == 1:
+    utils.print_board(size, board)
+    if opt == 1:
+        while not win:
+            print("Turn number {}".format(move+1))
             board, move = next_move(size, board, move)
-        else:
-            board, move = next_pvc_move(size, board, move, win_conditions)
-        print_board(size, board)
-        if move > (size-1)*2:
-            win = decide_winner(win_conditions, size, board, move)
+            utils.print_board(size, board)
+            if move > (size-1)*2:
+                win = decide_winner(win_conditions, size, board, move)
+    else:
+        is_first = int(input("Do you want to go first? (1/2) "))
+        while not win:
+            board, move = next_pvc_move(
+                size, board, move, win_conditions, is_first)
+            utils.print_board(size, board)
+            if move > (size-1)*2:
+                win = decide_winner(win_conditions, size, board, move)
 
 
 def main():

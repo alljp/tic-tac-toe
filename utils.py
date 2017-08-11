@@ -21,6 +21,25 @@ def print_instruction(size):
             print()
 
 
+def print_board(size, board):
+    for i in range(size):
+        print(" ", end="")
+        for j in range(size):
+            if board[i*size+j] == 1:
+                print(print_cell_value("X"), end="")
+            elif board[i*size+j] == 0:
+                print(print_cell_value("O"), end="")
+            else:
+                print(print_cell_value(" "), end="")
+            if j != size-1:
+                print(" | ", end="")
+        print()
+        if i != size-1:
+            print(print_row_seperator(size))
+        else:
+            print()
+
+
 def get_validate_move(size, turn):
     while True:
         move = input(

@@ -91,14 +91,28 @@ def get_comp_move(size, board, turn, win_conditions):
             return i
 
 
-def next_pvc_move(size, board, move, win_conditions):
-    turn = utils.decide_turn(move)
-    user = utils.get_validate_move(size, turn)
-    move += 1
-    board = utils.update_board(board, user, turn, size)
-    if move <= size*size-1:
+def next_pvc_move(size, board, move, win_conditions, is_first):
+    if is_first == 1:
+        turn = utils.decide_turn(move)
+        user = utils.get_validate_move(size, turn)
+        move += 1
+        board = utils.update_board(board, user, turn, size)
+        if move <= size*size-1:
+            comp_move = get_comp_move(
+                size, board, utils.decide_turn(move), win_conditions)
+            board = utils.update_board(
+                board, comp_move, utils.decide_turn(move), size)
+        return board, move+1
+    else:
         comp_move = get_comp_move(
             size, board, utils.decide_turn(move), win_conditions)
         board = utils.update_board(
             board, comp_move, utils.decide_turn(move), size)
-    return board, move+1
+        utils.print_board(size, board)
+        move += 1
+        turn = utils.decide_turn(move)
+        if move <= size*size-1:
+            print("Turn number {}".format(move+1))
+            user = utils.get_validate_move(size, turn)
+            board = utils.update_board(board, user, turn, size)
+        return board, move+1
