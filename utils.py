@@ -79,12 +79,11 @@ def get_update_user_move(size, board, move):
 
 def check_win(win_conditions, board):
     for i in win_conditions:
-        try:
-            out = []
-            for j in i:
-                out.append(True if board[i[0]] == board[j] else False)
-            if all(out):
-                return board[i[0]]
-        except:
-            pass
+        out = []
+        for j in i:
+            print(board[i[0]], board[j])
+            out.append(True if board[i[0]] == board[
+                       j] and board[i[0]] != -1 else False)
+        if all(out):
+            return board[i[0]]
     return -1
