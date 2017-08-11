@@ -39,6 +39,23 @@ def get_comp_fork_move(size, board, turn, win_conditions):
             return i
 
 
+def return_edges(size, board):
+    tmp = []
+    out = []
+    if size % 2 != 0:
+        tmp.append((size*size)//2)
+    else:
+        for i in [size*(size-1)//2, (size*(size-1)//2)-1,
+                  size*(size+1)//2, (size*(size+1)//2)-1]:
+            tmp.append(i)
+    for i in [0, size-1, size*size-1, size*(size-1)]:
+        tmp.append(i)
+    for i in range(size*size):
+        if i not in tmp:
+            out.append(i)
+    return out
+
+
 def get_player_fork_move(size, board, turn, win_conditions):
     possibilities = 0
     for i in range(size*size):
@@ -49,7 +66,7 @@ def get_player_fork_move(size, board, turn, win_conditions):
     if possibilities == 1:
         return temp_move
     elif possibilities > 1:
-        for j in [1, 3, 5, 7]:
+        for j in return_edges(size, board):
             if board[j] == -1:
                 return j
 
