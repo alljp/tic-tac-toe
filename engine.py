@@ -39,7 +39,7 @@ def get_comp_fork_move(size, board, turn, win_conditions):
             return i
 
 
-def return_edges(size, board):
+def return_edges(size):
     tmp = []
     out = []
     if size % 2 != 0:
@@ -66,7 +66,7 @@ def get_player_fork_move(size, board, turn, win_conditions):
     if possibilities == 1:
         return temp_move
     elif possibilities == 2:
-        for j in return_edges(size, board):
+        for j in return_edges(size):
             if board[j] == -1:
                 return j
 

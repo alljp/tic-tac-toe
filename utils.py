@@ -82,7 +82,7 @@ def check_win(win_conditions, board):
         out = []
         for j in i:
             out.append(True if board[i[0]] == board[
-                       j] and board[i[0]] != -1 else False)
+                j] and board[i[0]] != -1 else False)
         if all(out):
             return board[i[0]]
     return -1
