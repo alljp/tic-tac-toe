@@ -56,6 +56,10 @@ def get_validate_move(size, turn):
             print("{} is not a valid move! Please try again. ".format(move))
 
 
+def get_empty_cells(size, board):
+    return [i for i in range(size*size) if board[i] == -1]
+
+
 def update_board(board, move, turn, size):
     while board[move] != -1:
         print("Invalid move! Cell already taken. Please try again.\n")
