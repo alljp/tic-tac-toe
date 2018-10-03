@@ -8,4 +8,5 @@ The game engine uses a bruteforce algorithm to look for a move that doesnot let 
 
 Usage:
 
-Clone the repo and run python3 tic_tac_toe.py
+step 1: Clone the repo 
+step 2:  run python3 tic_tac_toe.py
